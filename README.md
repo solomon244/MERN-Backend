@@ -11,9 +11,7 @@ product app using node js
 ## Features
 
 CRUD operation
-
-## Installation
-
+## installation
 
 
 ```bash
