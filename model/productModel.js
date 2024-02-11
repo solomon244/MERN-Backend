@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', 
+        required: [true, 'User required'],
+    },
     title: {
-        type: String, // Fix the type
-        required: [true, "Title required"],
+        type: String,
+        required: [true, 'Title required'],
     },
     description: {
-        type: String, // Fix the type
-        required: [true, "Description required"],
+        type: String,
+        required: [true, 'Description required'],
     }
 }, {
     timestamps: true,
