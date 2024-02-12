@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const User = require("../model/userModel"); // Fix import statement for User model
+const User = require("../model/userModel"); 
 const asyncHandler = require("express-async-handler");
 
 // user register
 const register = async (req, res) => {
-    const { userName, email, password, role } = req.body;
-    if (!userName || !email || !password) {
+    const { name, email, password, role } = req.body;
+    if (!name || !email || !password) {
         return res.status(400).json({ error: "Please add all fields" });
     }
 
@@ -20,7 +20,7 @@ const register = async (req, res) => {
 
     try {
         const newUser = await User.create({
-            userName,
+            name,
             email,
             password: hashedPassword,
             role,
@@ -29,8 +29,9 @@ const register = async (req, res) => {
 
         res.status(201).json({
             id: newUser.id,
-            name: newUser.userName,
+            name: newUser.name,
             email: newUser.email,
+            role: newUser.role,
         });
     } catch (error) {
         res.status(400).json({ error: "User not registered" });
@@ -47,7 +48,7 @@ const login = async (req, res) => {
 
             return res.json({
                 _id: user.id,
-                userName: user.userName,
+                name: user.name,
                 email: user.email,
                 token:generateToken(user._id) 
             });
@@ -69,7 +70,7 @@ const getProfile = async (req, res) => {
         if (user) {
             res.json({
                 id: user._id,
-                userName: user.userName,
+                name: user.name,
                 email: user.email,
             });
         } else {
@@ -81,6 +82,6 @@ const getProfile = async (req, res) => {
     }
 };
 const generateToken = (id)=> {
-    return jwt.sign({id}, process.env.JWT_SECRET , {expiresIn: "1d"})
+    return jwt.sign({id}, process.env.JWT_SECRET , {expiresIn: "10d"})
 }
 module.exports = { register, login, getProfile }; 

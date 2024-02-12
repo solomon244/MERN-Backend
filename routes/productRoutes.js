@@ -11,7 +11,7 @@ const {
     getAllProducts
 }
 =require("../controllers/productController");
-router.get('/product',protect, getProducts);
+router.get('/',protect, getProducts);
 router.post('/product',protect,productValidator, createProduct);
 router.put('/product/:id',protect, updateProduct);
 router.delete('/product/:id',protect, deleteProduct);

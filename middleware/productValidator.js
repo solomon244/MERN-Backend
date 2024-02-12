@@ -1,22 +1,21 @@
-const joi=require('joi')
+const Joi = require('joi');
 
-const productValidator=(req,res,next)=>{
+const productValidator = (req, res, next) => {
     
     const schema = Joi.object({
         title: Joi.string().required(),
         description: Joi.string().required(),
         price: Joi.number().required(),
-      });
+    });
     
-      const { error } = schema.validate(req.body);
-      if (error) {
+    const { error } = schema.validate(req.body);
+    if (error) {
         return res.status(400).json({ error: error.details[0].message });
-      }
-      next();
+    }
+    next();
 
 }
 
-
-module.exports={
+module.exports = {
     productValidator,
 }

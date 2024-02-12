@@ -2,9 +2,10 @@ const Joi = require('joi');
 
 const userValidation = (req, res, next) => {
     const schema = Joi.object({
-        userName: Joi.string().max(20).min(3).pattern(new RegExp('^[a-zA-Z]+$')),
+        name: Joi.string().max(20).min(3).pattern(new RegExp('^[a-zA-Z]+$')),
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
         password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+        role: Joi.string().valid('admin', 'user') 
        
     });
 
