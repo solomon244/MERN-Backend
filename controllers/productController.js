@@ -22,7 +22,9 @@ const createProduct = async (req, res) => {
         user:req.user.id,
         title: req.body.title,
         description: req.body.description,
-        price: req.body.price
+        price: req.body.price,
+        brand:req.body.brand,
+        quantity:req.body.quantity,
     });
     res.status(200).json(products);
 };
@@ -37,7 +39,7 @@ const user = await User.findById(req.user.id)
 if(!user){
     res.status(401).Json({error:"user not found"})
 }
-if(product.user.toString() !== user.id){
+if(products.user.toString() !== user.id){
     res.status(401).Json({error:"user not authorized"})
 }
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -55,12 +57,12 @@ const deleteProduct = async (req, res) => {
 if(!user){
     res.status(401).Json({error:"user not found"})
 }
-if(product.user.toString() !== user.id){
+if( products.user.toString() !== user.id){
     res.status(401).Json({error:"user not authorized"})
 }
-    const productDelete = await Product.findByIdAndDelete(req.params.id);
+    const productDelete = await Product.findByIdAndRemove(req.params.id);
 
-    res.status(200).json({ productDelete, message: 'Deleted successfully' });
+    res.status(200).json({  message: 'Deleted successfully' });
 };
 
 module.exports = {
