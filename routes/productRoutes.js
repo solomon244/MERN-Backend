@@ -12,11 +12,12 @@ const {
 }
 =require("../controllers/productController");
 router.get('/',protect, getProducts);
-router.post('/product',protect,productValidator, createProduct);
-router.put('/product/:id',protect, updateProduct);
-router.delete('/product/:id',protect, deleteProduct);
+router.post('/register',protect,productValidator, createProduct);
+router.put('/update/:id',protect, updateProduct);
+router.delete('/delete/:id',protect, deleteProduct);
 
 router.get("/getAllProduct" , protect, adminValidator, getAllProducts)
 
 module.exports = router;
 
+ 
