@@ -6,7 +6,7 @@ const User = require('../model/userModel')
 
 //get all product
 const getAllProducts = asyncHandler(async(req , res)=>{
-    const products = await product.find();
+    const products = await Product.find();
     res.status(200).json(products)
 })
 
