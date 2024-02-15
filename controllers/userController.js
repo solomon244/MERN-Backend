@@ -28,10 +28,12 @@ const register = async (req, res) => {
         });
 
         res.status(201).json({
-            id: newUser.id,
+            _id: newUser.id,
             name: newUser.name,
             email: newUser.email,
             role: newUser.role,
+            token:generateToken(newUser._id)
+
         });
     } catch (error) {
         res.status(400).json({ error: "User not registered" });
@@ -72,6 +74,8 @@ const getProfile = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
+                role:user.role,
+                token:generateToken(user._id),
             });
         } else {
             res.status(404).json({ error: "User not found" });
