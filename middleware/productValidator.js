@@ -6,6 +6,8 @@ const productValidator = (req, res, next) => {
         title: Joi.string().required(),
         description: Joi.string().required(),
         price: Joi.number().required(),
+        quantity:Joi.number().required(),
+        brand:Joi.string(),
     });
     
     const { error } = schema.validate(req.body);
